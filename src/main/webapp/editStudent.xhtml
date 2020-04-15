@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+</h:head>
+
+    <h:form id="form">
+        <p:panelGrid style="margin-top: 20px">
+            <f:facet name="header">
+                <p:row>
+                    <p:column colspan="7">Students</p:column>
+                </p:row>
+                    <p:row>
+                        <p:column>Name</p:column>
+                        <p:column>Email</p:column>
+                        <p:column>Contact Number</p:column>
+                        <p:column>Program</p:column>
+                        <p:column>D.O.B.</p:column>
+                        <p:column>Update</p:column>
+                        <p:column>Delete</p:column>
+                    </p:row>
+            </f:facet>
+            <p:repeat value="#{allStudentsView.students}" var="student">
+                <p:row>
+                    <p:column>#{student.name}</p:column>
+                    <p:column>#{student.email}</p:column>
+                    <p:column>#{student.contactNumber}</p:column>
+                    <p:column>#{student.program}</p:column>
+                    <p:column>#{student.doB}</p:column>
+                    <p:column><p:commandButton value="Update student" action="#{allStudentsView.redirectToEditStudent}"
+                                     style="margin-right:20px;">
+                        <f:actionListener binding="#{editStudentsView.populateView(student.id)}" />
+                    </p:commandButton></p:column>
+                    <p:column><p:commandButton value="Delete student" action="#{allStudentsView.deleteStudent(student.id)}"
+                                               style="margin-right:20px;"/></p:column>
+                </p:row>
+            </p:repeat>
+        </p:panelGrid>
+        <hr/>
+        <p:commandButton value="Add Student" action="#{allStudentsView.redirectToEditStudent}" style="margin-right:20px;"/>
+    </h:form>
+</html>
